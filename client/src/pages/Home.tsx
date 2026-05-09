@@ -498,43 +498,138 @@ export default function Home() {
           style={{ scrollBehavior: "smooth" }}
         >
           {/* Cover / Hero */}
-          <div className="bg-[oklch(0.13_0.005_264)] text-white px-8 md:px-16 py-16 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white transform translate-x-32 -translate-y-32" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white transform -translate-x-16 translate-y-16" />
-            </div>
-            <div className="relative max-w-4xl">
-              <img src={LOGO_URL} alt="United Elite" className="h-20 w-auto object-contain mb-8" />
+          <div
+            className="relative text-white overflow-hidden"
+            style={{
+              minHeight: "420px",
+              backgroundImage: `url('https://d2xsxph8kpxj0f.cloudfront.net/310519663270045816/N4rgkrRwWxtgy5x7UFcaiD/ue-hero-bg-eVL8ERakvbNcsTGyvQiXdJ.webp')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
+            }}
+          >
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(5,15,40,0.70) 50%, rgba(0,0,0,0.55) 100%)" }} />
+
+            {/* Animated scan line */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div
-                className="text-[oklch(0.52_0.18_240)] text-[11px] tracking-[0.3em] uppercase font-bold mb-3"
-                style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: "2px",
+                  background: "linear-gradient(90deg, transparent 0%, rgba(40,120,200,0.8) 50%, transparent 100%)",
+                  animation: "scanline 3s ease-in-out infinite",
+                }}
+              />
+            </div>
+
+            {/* Pulsing corner accent — top left */}
+            <div className="absolute top-0 left-0 w-32 h-32 pointer-events-none" style={{ background: "radial-gradient(circle at top left, rgba(40,120,200,0.25) 0%, transparent 70%)" }} />
+            {/* Pulsing corner accent — bottom right */}
+            <div className="absolute bottom-0 right-0 w-48 h-48 pointer-events-none" style={{ background: "radial-gradient(circle at bottom right, rgba(40,120,200,0.18) 0%, transparent 70%)" }} />
+
+            {/* Horizontal rule top */}
+            <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "linear-gradient(90deg, transparent, rgba(40,120,200,0.9), transparent)" }} />
+
+            {/* Content */}
+            <div className="relative px-8 md:px-16 py-14 max-w-4xl" style={{ animation: "heroFadeIn 0.8s ease-out both" }}>
+              {/* Logo with glow */}
+              <div
+                className="mb-8 inline-block"
+                style={{
+                  filter: "drop-shadow(0 0 18px rgba(40,120,200,0.7)) drop-shadow(0 2px 8px rgba(0,0,0,0.9)) brightness(1.15)",
+                }}
+              >
+                <img src={LOGO_URL} alt="United Elite" className="h-24 w-auto object-contain" />
+              </div>
+
+              <div
+                className="text-[11px] tracking-[0.35em] uppercase font-bold mb-3"
+                style={{
+                  fontFamily: "'Barlow Condensed', Arial, sans-serif",
+                  color: "rgba(100,180,255,1)",
+                  textShadow: "0 0 12px rgba(40,120,200,0.8)",
+                  animation: "heroFadeIn 0.8s 0.15s ease-out both",
+                }}
               >
                 Official Program Document
               </div>
+
               <h1
-                className="text-white mb-4 leading-none"
+                className="leading-none mb-4"
                 style={{
                   fontFamily: "'Barlow Condensed', Arial, sans-serif",
                   fontWeight: 800,
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
                   letterSpacing: "0.03em",
+                  color: "#ffffff",
+                  textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(40,120,200,0.3)",
+                  animation: "heroFadeIn 0.8s 0.25s ease-out both",
                 }}
               >
                 STAFF OPERATIONS MANUAL
               </h1>
-              <div className="w-16 h-1 bg-[oklch(0.52_0.18_240)] mb-6" />
-              <p className="text-[oklch(0.70_0.02_264)] text-[15px] leading-[1.8] max-w-2xl">
+
+              {/* Animated underline */}
+              <div
+                className="mb-6"
+                style={{
+                  width: "64px",
+                  height: "3px",
+                  background: "linear-gradient(90deg, rgb(40,120,200), rgba(100,180,255,0.6))",
+                  boxShadow: "0 0 10px rgba(40,120,200,0.8)",
+                  animation: "heroLineExpand 0.6s 0.4s ease-out both",
+                }}
+              />
+
+              <p
+                className="text-[15px] leading-[1.8] max-w-2xl"
+                style={{
+                  color: "rgba(200,220,255,0.92)",
+                  textShadow: "0 1px 6px rgba(0,0,0,0.8)",
+                  animation: "heroFadeIn 0.8s 0.35s ease-out both",
+                }}
+              >
                 This manual is the definitive guide to coaching standards, program systems, policies, and procedures at United Elite. Every coach is expected to read, understand, and operate in full compliance with everything contained herein.
               </p>
+
               <div
-                className="mt-8 inline-block bg-[oklch(0.52_0.18_240)] text-white px-6 py-2 text-[13px] tracking-widest uppercase font-bold"
-                style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
+                className="mt-8 inline-block text-white px-6 py-2 text-[13px] tracking-widest uppercase font-bold"
+                style={{
+                  fontFamily: "'Barlow Condensed', Arial, sans-serif",
+                  background: "linear-gradient(135deg, rgb(40,120,200), rgb(20,80,160))",
+                  boxShadow: "0 0 20px rgba(40,120,200,0.6), 0 4px 12px rgba(0,0,0,0.5)",
+                  border: "1px solid rgba(100,180,255,0.3)",
+                  animation: "heroFadeIn 0.8s 0.45s ease-out both",
+                }}
               >
                 #RISEUP
               </div>
             </div>
+
+            {/* Bottom fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-16" style={{ background: "linear-gradient(to bottom, transparent, rgba(248,249,252,0.15))" }} />
           </div>
+
+          {/* Hero animations */}
+          <style>{`
+            @keyframes heroFadeIn {
+              from { opacity: 0; transform: translateY(16px); }
+              to   { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes heroLineExpand {
+              from { width: 0; opacity: 0; }
+              to   { width: 64px; opacity: 1; }
+            }
+            @keyframes scanline {
+              0%   { top: 0; opacity: 0; }
+              10%  { opacity: 1; }
+              90%  { opacity: 1; }
+              100% { top: 100%; opacity: 0; }
+            }
+          `}</style>
 
           {/* Sections */}
           <div className="max-w-4xl mx-auto px-6 md:px-12 py-10">
