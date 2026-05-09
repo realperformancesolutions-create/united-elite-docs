@@ -510,21 +510,6 @@ export default function Home() {
             {/* Dark overlay for text readability */}
             <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(5,15,40,0.70) 50%, rgba(0,0,0,0.55) 100%)" }} />
 
-            {/* Animated scan line */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "2px",
-                  background: "linear-gradient(90deg, transparent 0%, rgba(40,120,200,0.8) 50%, transparent 100%)",
-                  animation: "scanline 3s ease-in-out infinite",
-                }}
-              />
-            </div>
-
             {/* Pulsing corner accent — top left */}
             <div className="absolute top-0 left-0 w-32 h-32 pointer-events-none" style={{ background: "radial-gradient(circle at top left, rgba(40,120,200,0.25) 0%, transparent 70%)" }} />
             {/* Pulsing corner accent — bottom right */}
@@ -622,12 +607,6 @@ export default function Home() {
             @keyframes heroLineExpand {
               from { width: 0; opacity: 0; }
               to   { width: 64px; opacity: 1; }
-            }
-            @keyframes scanline {
-              0%   { top: 0; opacity: 0; }
-              10%  { opacity: 1; }
-              90%  { opacity: 1; }
-              100% { top: 100%; opacity: 0; }
             }
           `}</style>
 
