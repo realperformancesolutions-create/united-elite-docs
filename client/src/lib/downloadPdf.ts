@@ -35,7 +35,7 @@ function addPageHeader(doc: jsPDF, sectionNum: string, sectionTitle: string) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(...WHITE);
-  doc.text("CHEER FLORIDA", MARGIN_L, 11.5);
+  doc.text("UNITED ELITE", MARGIN_L, 11.5);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
@@ -54,7 +54,7 @@ function addPageFooter(doc: jsPDF) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7);
   doc.setTextColor(180, 190, 210);
-  doc.text("CHEER FLORIDA  ·  STAFF OPERATIONS MANUAL  ·  CONFIDENTIAL", PAGE_W / 2, PAGE_H - 3.5, { align: "center" });
+  doc.text("UNITED ELITE  ·  STAFF OPERATIONS MANUAL  ·  CONFIDENTIAL", PAGE_W / 2, PAGE_H - 3.5, { align: "center" });
   doc.setTextColor(...RED);
   doc.setFont("helvetica", "bold");
   doc.text("#UNITEDELITE", PAGE_W - MARGIN_R, PAGE_H - 3.5, { align: "right" });
@@ -91,7 +91,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   let logoDataUrl: string | null = null;
   try {
     logoDataUrl = await loadImageAsDataURL(
-      "https://d2xsxph8kpxj0f.cloudfront.net/310519663270045816/N4rgkrRwWxtgy5x7UFcaiD/cfa-logo_508dfd17.png"
+      "https://d2xsxph8kpxj0f.cloudfront.net/310519663270045816/N4rgkrRwWxtgy5x7UFcaiD/united-elite-logo_77dd2c04.webp"
     );
   } catch {
     logoDataUrl = null;
@@ -124,7 +124,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
     doc.setTextColor(...WHITE);
-    doc.text("CHEER FLORIDA", MARGIN_L, 26);
+    doc.text("UNITED ELITE", MARGIN_L, 26);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
     doc.setTextColor(180, 190, 210);
@@ -143,7 +143,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9.5);
   doc.setTextColor(180, 190, 210);
-  doc.text("CHEER FLORIDA  ·  OFFICIAL PROGRAM DOCUMENT", MARGIN_L, PAGE_H * 0.60 + 13);
+  doc.text("UNITED ELITE  ·  OFFICIAL PROGRAM DOCUMENT", MARGIN_L, PAGE_H * 0.60 + 13);
 
   // #UNITEDELITE
   doc.setFont("helvetica", "bold");
@@ -155,7 +155,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
   doc.setTextColor(100, 110, 140);
-  doc.text("CONFIDENTIAL — FOR CHEER FLORIDA COACHING STAFF ONLY", MARGIN_L, PAGE_H - 12);
+  doc.text("CONFIDENTIAL — FOR UNITED ELITE COACHING STAFF ONLY", MARGIN_L, PAGE_H - 12);
 
   addPageFooter(doc);
 
@@ -208,7 +208,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   // ── Sections ──────────────────────────────────────────────────────────────
   const totalSections = SECTIONS.length;
   let currentSection = "00";
-  let currentSectionTitle = "CHEER FLORIDA STAFF OPERATIONS MANUAL";
+  let currentSectionTitle = "UNITED ELITE STAFF OPERATIONS MANUAL";
 
   let y = BODY_BOTTOM; // force a new page for the first section
 
@@ -302,7 +302,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
 
   if (onProgress) onProgress(100);
 
-  doc.save("CFA_Staff_Operations_Manual.pdf");
+  doc.save("United_Elite_Staff_Operations_Manual.pdf");
 }
 
 function renderBlock(
