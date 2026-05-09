@@ -377,7 +377,7 @@ export default function Home() {
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             </button>
-            <img src={LOGO_URL} alt="Cheer Florida" className="h-8 w-auto object-contain" />
+            <img src={LOGO_URL} alt="United Elite" className="h-8 w-auto object-contain" />
             <div className="hidden sm:block">
               <div
                 className="text-[11px] tracking-[0.15em] text-[oklch(0.65_0.02_264)] uppercase"
@@ -404,7 +404,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <span className="text-[oklch(0.52_0.18_240)] text-[11px] font-bold tracking-widest hidden sm:block"
               style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}>
-              #GETAGRIP
+              #RISEUP
             </span>
             <button
               onClick={handleDownloadPdf}
@@ -505,7 +505,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white transform -translate-x-16 translate-y-16" />
             </div>
             <div className="relative max-w-4xl">
-              <img src={LOGO_URL} alt="Cheer Florida" className="h-20 w-auto object-contain mb-8" />
+              <img src={LOGO_URL} alt="United Elite" className="h-20 w-auto object-contain mb-8" />
               <div
                 className="text-[oklch(0.52_0.18_240)] text-[11px] tracking-[0.3em] uppercase font-bold mb-3"
                 style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
@@ -525,13 +525,13 @@ export default function Home() {
               </h1>
               <div className="w-16 h-1 bg-[oklch(0.52_0.18_240)] mb-6" />
               <p className="text-[oklch(0.70_0.02_264)] text-[15px] leading-[1.8] max-w-2xl">
-                This manual is the definitive guide to coaching standards, program systems, policies, and procedures at Cheer Florida. Every coach is expected to read, understand, and operate in full compliance with everything contained herein.
+                This manual is the definitive guide to coaching standards, program systems, policies, and procedures at United Elite. Every coach is expected to read, understand, and operate in full compliance with everything contained herein.
               </p>
               <div
                 className="mt-8 inline-block bg-[oklch(0.52_0.18_240)] text-white px-6 py-2 text-[13px] tracking-widest uppercase font-bold"
                 style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
               >
-                #GETAGRIP
+                #RISEUP
               </div>
             </div>
           </div>
@@ -617,22 +617,22 @@ export default function Home() {
           {/* Footer */}
           <footer className="bg-[oklch(0.13_0.005_264)] text-[oklch(0.55_0.02_264)] px-8 py-8 mt-8">
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-              <img src={LOGO_URL} alt="Cheer Florida" className="h-10 w-auto object-contain opacity-80" />
+              <img src={LOGO_URL} alt="United Elite" className="h-10 w-auto object-contain opacity-80" />
               <div className="text-center md:text-right">
                 <div
                   className="text-white text-[11px] tracking-[0.2em] uppercase mb-1"
                   style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
                 >
-                  Cheer Florida Staff Operations Manual
+                  United Elite Staff Operations Manual
                 </div>
                 <div className="text-[11px]">
-                  Confidential — For Cheer Florida Coaching Staff Only
+                  Confidential — For United Elite Coaching Staff Only
                 </div>
                 <div
                   className="text-[oklch(0.52_0.18_240)] text-[11px] font-bold tracking-widest mt-1"
                   style={{ fontFamily: "'Barlow Condensed', Arial, sans-serif" }}
                 >
-                  #GETAGRIP
+                  #RISEUP
                 </div>
               </div>
             </div>

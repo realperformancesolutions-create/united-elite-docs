@@ -121,7 +121,7 @@ export const SECTIONS: ManualSection[] = [
       },
       {
         type: "italic_intro",
-        text: "At United Elite we live by four foundational values: Discipline, Excellence, Resilience, and Integrity. These are not aspirational words — they are the operating standards that define who we are as coaches, as a program, and as a community. Every decision, every practice, and every interaction should reflect these values.",
+        text: "At United Elite we live by four foundational values: Resilience, Integrity, Standards, and Excellence — #RISE. These are not aspirational words — they are the operating standards that define who we are as coaches, as a program, and as a community. Every decision, every practice, and every interaction should reflect these values.",
       },
       {
         type: "body",
@@ -136,25 +136,15 @@ export const SECTIONS: ManualSection[] = [
   {
     num: "02",
     title: "CORE VALUES",
-    sub: "Discipline, Excellence, Resilience, Integrity — The Foundation of Our Coaching Staff",
+    sub: "Resilience, Integrity, Standards, Excellence — #RISE. The Foundation of Our Coaching Staff",
     content: [
       {
         type: "italic_intro",
-        text: "Our coaching philosophy is built on four core pillars. As a United Elite coach, these values are not aspirational — they are operational. They guide every decision you make, every interaction you have, and every practice you run.",
+        text: "Our coaching philosophy is built on four core pillars — #RISE. As a United Elite coach, these values are not aspirational — they are operational. They guide every decision you make, every interaction you have, and every practice you run.",
       },
       {
         type: "grip_cards",
         cards: [
-          {
-            letter: "D",
-            word: "DISCIPLINE",
-            desc: "Discipline is the foundation of everything we build. As a coach, you model consistency, structure, and self-control — in how you run practices, how you communicate, and how you carry yourself. Discipline is not punishment; it is the daily commitment to doing the right thing, even when it is difficult.",
-          },
-          {
-            letter: "E",
-            word: "EXCELLENCE",
-            desc: "We do not settle for good enough. Excellence means holding yourself and your athletes to the highest standard — in skill execution, preparation, attitude, and professionalism. You pursue mastery in your craft and push your athletes to reach their full potential every single day.",
-          },
           {
             letter: "R",
             word: "RESILIENCE",
@@ -164,6 +154,16 @@ export const SECTIONS: ManualSection[] = [
             letter: "I",
             word: "INTEGRITY",
             desc: "Integrity means doing the right thing when no one is watching. As a United Elite coach, you are honest with your athletes, transparent with leadership, and consistent in your actions. You represent this program with honor — in the gym, at competitions, and in your community.",
+          },
+          {
+            letter: "S",
+            word: "STANDARDS",
+            desc: "Standards are the non-negotiable benchmarks that define how we operate every single day. As a United Elite coach, you hold yourself and your athletes to a high bar — in preparation, professionalism, skill execution, and conduct. Standards are not suggestions; they are the baseline for belonging to this program.",
+          },
+          {
+            letter: "E",
+            word: "EXCELLENCE",
+            desc: "We do not settle for good enough. Excellence means holding yourself and your athletes to the highest standard — in skill execution, preparation, attitude, and professionalism. You pursue mastery in your craft and push your athletes to reach their full potential every single day.",
           },
         ],
       },

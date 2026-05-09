@@ -57,7 +57,7 @@ function addPageFooter(doc: jsPDF) {
   doc.text("UNITED ELITE  ·  STAFF OPERATIONS MANUAL  ·  CONFIDENTIAL", PAGE_W / 2, PAGE_H - 3.5, { align: "center" });
   doc.setTextColor(...RED);
   doc.setFont("helvetica", "bold");
-  doc.text("#UNITEDELITE", PAGE_W - MARGIN_R, PAGE_H - 3.5, { align: "right" });
+  doc.text("#RISEUP", PAGE_W - MARGIN_R, PAGE_H - 3.5, { align: "right" });
 }
 
 function newPage(doc: jsPDF, sectionNum: string, sectionTitle: string): number {
@@ -87,7 +87,7 @@ async function loadImageAsDataURL(url: string): Promise<string> {
 export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
 
-  // Load CFA logo
+  // Load United Elite logo
   let logoDataUrl: string | null = null;
   try {
     logoDataUrl = await loadImageAsDataURL(
@@ -113,12 +113,12 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.setFillColor(...RED);
   doc.rect(0, PAGE_H * 0.60, PAGE_W, 2, "F");
 
-  // CFA Logo — top-left, generous padding from top stripe
+  // United Elite Logo — top-left, portrait format (1570x2048, ratio 0.767)
   if (logoDataUrl) {
-    // Logo is wide (approx 3:1 ratio) — render at 80mm wide
-    const logoW = 80;
-    const logoH = 27; // ~1:3 ratio
-    doc.addImage(logoDataUrl, "PNG", MARGIN_L, 14, logoW, logoH);
+    // render at 30mm wide, height = 30/0.767 = ~39mm, preserves aspect ratio
+    const logoW = 30;
+    const logoH = Math.round(logoW / 0.767); // = 39mm, preserves aspect ratio
+    doc.addImage(logoDataUrl, "PNG", MARGIN_L, 12, logoW, logoH);
   } else {
     // Fallback text wordmark
     doc.setFont("helvetica", "bold");
@@ -135,9 +135,9 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(46);
   doc.setTextColor(...WHITE);
-  doc.text("STAFF", MARGIN_L, 110);
-  doc.text("OPERATIONS", MARGIN_L, 133);
-  doc.text("MANUAL", MARGIN_L, 156);
+  doc.text("STAFF", MARGIN_L, 115);
+  doc.text("OPERATIONS", MARGIN_L, 138);
+  doc.text("MANUAL", MARGIN_L, 161);
 
   // Subtitle below red divider bar
   doc.setFont("helvetica", "normal");
@@ -145,11 +145,11 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.setTextColor(180, 190, 210);
   doc.text("UNITED ELITE  ·  OFFICIAL PROGRAM DOCUMENT", MARGIN_L, PAGE_H * 0.60 + 13);
 
-  // #UNITEDELITE
+  // #RISEUP
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
   doc.setTextColor(...RED);
-  doc.text("#UNITEDELITE", MARGIN_L, PAGE_H * 0.60 + 26);
+  doc.text("#RISEUP", MARGIN_L, PAGE_H * 0.60 + 26);
 
   // Confidential notice
   doc.setFont("helvetica", "normal");
