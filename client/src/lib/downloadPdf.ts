@@ -1,15 +1,17 @@
 // PDF Download utility for United Elite Staff Operations Manual
 // Uses jsPDF to generate a branded, multi-page PDF from the manual data
-
+// Color palette derived from United Elite logo: black background, steel blue accents, silver highlights
 import jsPDF from "jspdf";
 import { SECTIONS, ContentBlock } from "./manualData";
-
-const NAVY = [26, 42, 89] as const;
-const RED = [190, 30, 45] as const;
+const NAVY = [10, 12, 18] as const;          // Near-black (logo background)
+const BLUE = [40, 120, 200] as const;         // United Elite primary blue (logo shield)
+const LIGHT_BLUE = [140, 180, 240] as const;  // Light blue highlight
+const RED = [40, 120, 200] as const;          // Repurpose RED constant to UE blue for accents
 const WHITE = [255, 255, 255] as const;
-const LIGHT_GRAY = [248, 248, 250] as const;
-const MID_GRAY = [100, 110, 130] as const;
-const DARK = [35, 40, 55] as const;
+const LIGHT_GRAY = [245, 247, 250] as const;
+const MID_GRAY = [120, 130, 150] as const;
+const DARK = [20, 22, 30] as const;
+const SILVER = [180, 185, 195] as const;      // Silver/chrome from logo metallic effect
 
 const PAGE_W = 210; // A4 mm
 const PAGE_H = 297;
@@ -29,7 +31,7 @@ const LABEL_MIN_FOLLOWING = 30;
 function addPageHeader(doc: jsPDF, sectionNum: string, sectionTitle: string) {
   doc.setFillColor(...NAVY);
   doc.rect(0, 0, PAGE_W, 18, "F");
-  doc.setFillColor(...RED);
+  doc.setFillColor(...BLUE);
   doc.rect(0, 18, PAGE_W, 1.5, "F");
 
   doc.setFont("helvetica", "bold");
@@ -55,7 +57,7 @@ function addPageFooter(doc: jsPDF) {
   doc.setFontSize(7);
   doc.setTextColor(180, 190, 210);
   doc.text("UNITED ELITE  ·  STAFF OPERATIONS MANUAL  ·  CONFIDENTIAL", PAGE_W / 2, PAGE_H - 3.5, { align: "center" });
-  doc.setTextColor(...RED);
+  doc.setTextColor(...WHITE);
   doc.setFont("helvetica", "bold");
   doc.text("#RISEUP", PAGE_W - MARGIN_R, PAGE_H - 3.5, { align: "right" });
 }
@@ -98,19 +100,17 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   }
 
   // ── Cover Page ────────────────────────────────────────────────────────────
-  doc.setFillColor(...NAVY);
+  doc.setFillColor(...BLUE);
   doc.rect(0, 0, PAGE_W, PAGE_H, "F");
 
-  // Top red stripe
-  doc.setFillColor(...RED);
+   // Top blue stripe
+  doc.setFillColor(...BLUE);
   doc.rect(0, 0, PAGE_W, 5, "F");
-
-  // Bottom red stripe
-  doc.setFillColor(...RED);
+  // Bottom blue stripe
+  doc.setFillColor(...BLUE);
   doc.rect(0, PAGE_H - 5, PAGE_W, 5, "F");
-
   // Horizontal divider line — at 60% height
-  doc.setFillColor(...RED);
+  doc.setFillColor(...BLUE);
   doc.rect(0, PAGE_H * 0.60, PAGE_W, 2, "F");
 
   // United Elite Logo — top-left, portrait format (1570x2048, ratio 0.767)
@@ -148,13 +148,13 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   // #RISEUP
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13);
-  doc.setTextColor(...RED);
+  doc.setTextColor(...BLUE);
   doc.text("#RISEUP", MARGIN_L, PAGE_H * 0.60 + 26);
 
   // Confidential notice
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
-  doc.setTextColor(100, 110, 140);
+  doc.setTextColor(...SILVER);
   doc.text("CONFIDENTIAL — FOR UNITED ELITE COACHING STAFF ONLY", MARGIN_L, PAGE_H - 12);
 
   addPageFooter(doc);
@@ -163,12 +163,11 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
   doc.addPage();
   addPageHeader(doc, "00", "TABLE OF CONTENTS");
 
-  doc.setFont("helvetica", "bold");
+   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
-  doc.setTextColor(...NAVY);
+  doc.setTextColor(...DARK);
   doc.text("TABLE OF CONTENTS", MARGIN_L, 34);
-
-  doc.setFillColor(...RED);
+  doc.setFillColor(...BLUE);
   doc.rect(MARGIN_L, 37, 14, 1.5, "F");
 
   const TOC_ROW_H = 8;
@@ -187,7 +186,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
     }
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8);
-    doc.setTextColor(...RED);
+    doc.setTextColor(...BLUE);
     doc.text(section.num, MARGIN_L + 2, tocY + 0.5);
 
     doc.setFont("helvetica", "bold");
@@ -225,26 +224,23 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
     y = newPage(doc, currentSection, currentSectionTitle);
 
     // Section heading block — with proper spacing between label and title
-    doc.setFont("helvetica", "bold");
+     doc.setFont("helvetica", "bold");
     doc.setFontSize(7.5);
-    doc.setTextColor(...RED);
+    doc.setTextColor(...BLUE);
     doc.text(`SECTION ${section.num}`, MARGIN_L, y);
-    y += 8; // <-- increased gap between "SECTION XX" label and the big title
-
+    y += 8;
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    doc.setTextColor(...NAVY);
+    doc.setTextColor(...DARK);
     const titleLines = doc.splitTextToSize(section.title, CONTENT_W);
     doc.text(titleLines, MARGIN_L, y);
     y += titleLines.length * 8 + 2;
-
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8.5);
     doc.setTextColor(...MID_GRAY);
     doc.text(section.sub, MARGIN_L, y);
     y += 5;
-
-    doc.setFillColor(...RED);
+    doc.setFillColor(...BLUE);
     doc.rect(MARGIN_L, y, 12, 1.2, "F");
     y += 9;
 
@@ -262,7 +258,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
         y = newPage(doc, currentSection, currentSectionTitle);
       }
       y += 5;
-      doc.setDrawColor(...NAVY);
+      doc.setDrawColor(...BLUE);
       doc.setLineWidth(0.3);
       doc.rect(MARGIN_L, y, CONTENT_W, 60, "S");
 
@@ -272,7 +268,7 @@ export async function downloadManualPdf(onProgress?: (pct: number) => void) {
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(7);
-      doc.setTextColor(...NAVY);
+      doc.setTextColor(...DARK);
       doc.text("COACH SIGNATURE", col1X, y + 8);
       doc.text("PROGRAM LEADERSHIP", col2X, y + 8);
 
@@ -344,7 +340,7 @@ function renderBlock(
       y = checkPage(lines.length * 5.5 + 10);
       doc.setFillColor(245, 245, 248);
       doc.rect(MARGIN_L, y - 3, CONTENT_W, lines.length * 5.5 + 8, "F");
-      doc.setDrawColor(...RED);
+      doc.setDrawColor(...BLUE);
       doc.setLineWidth(0.8);
       doc.line(MARGIN_L, y - 3, MARGIN_L, y + lines.length * 5.5 + 5);
       doc.setFont("helvetica", "italic");
@@ -360,10 +356,10 @@ function renderBlock(
       y = checkPage(LABEL_MIN_FOLLOWING);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(8.5);
-      doc.setTextColor(...RED);
+      doc.setTextColor(...BLUE);
       doc.text(block.text.toUpperCase(), MARGIN_L, y);
       y += 2.5;
-      doc.setDrawColor(...RED);
+      doc.setDrawColor(...BLUE);
       doc.setLineWidth(0.5);
       doc.line(MARGIN_L, y, MARGIN_L + 32, y);
       y += 6;
@@ -376,7 +372,7 @@ function renderBlock(
         doc.setFontSize(9);
         const lines = doc.splitTextToSize(item, CONTENT_W - 9);
         y = checkPage(lines.length * 5.5 + 3);
-        doc.setFillColor(...RED);
+        doc.setFillColor(...BLUE);
         doc.rect(MARGIN_L + 1, y - 2, 2.5, 2.5, "F");
         doc.setFont("helvetica", "normal");
         doc.setFontSize(9);
@@ -396,7 +392,7 @@ function renderBlock(
         y = checkPage(lines.length * 5.5 + 3);
         doc.setFont("helvetica", "bold");
         doc.setFontSize(8.5);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(`${i + 1}.`, MARGIN_L + 1, y);
         doc.setFont("helvetica", "normal");
         doc.setFontSize(9);
@@ -414,7 +410,7 @@ function renderBlock(
       doc.rect(MARGIN_L, y - 3, CONTENT_W, 12, "F");
       doc.setFont("helvetica", "bold");
       doc.setFontSize(8.5);
-      doc.setTextColor(...RED);
+      doc.setTextColor(...BLUE);
       doc.text(`→  ${block.label}`, MARGIN_L + 4, y + 2);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(7.5);
@@ -435,15 +431,15 @@ function renderBlock(
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(22);
-        doc.setTextColor(...RED);
+        doc.setTextColor(...BLUE);
         doc.text(card.letter, cx + 4, y + 14);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7.5);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(card.word, cx + 4, y + 20);
 
-        doc.setFillColor(...RED);
+        doc.setFillColor(...BLUE);
         doc.rect(cx + 4, y + 22, 10, 0.8, "F");
 
         doc.setFont("helvetica", "normal");
@@ -468,7 +464,7 @@ function renderBlock(
 
       // Header
       y = checkPage(rowH + 4);
-      doc.setFillColor(...NAVY);
+      doc.setFillColor(...BLUE);
       doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
       doc.setFont("helvetica", "bold");
       doc.setFontSize(7.5);
@@ -492,7 +488,7 @@ function renderBlock(
           addPageHeader(doc, sectionNum, sectionTitle);
           y = 28;
           // Repeat header on new page
-          doc.setFillColor(...NAVY);
+          doc.setFillColor(...BLUE);
           doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
           doc.setFont("helvetica", "bold");
           doc.setFontSize(7.5);
@@ -515,7 +511,7 @@ function renderBlock(
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7.5);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(descLines, descX, y + 5);
 
         doc.setFont("helvetica", "normal");
@@ -539,12 +535,12 @@ function renderBlock(
 
         doc.setFillColor(240, 242, 248);
         doc.rect(MARGIN_L, y, CONTENT_W, stepH, "F");
-        doc.setFillColor(...NAVY);
+        doc.setFillColor(...BLUE);
         doc.rect(MARGIN_L, y, 3, stepH, "F");
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7.5);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(step.title.toUpperCase(), MARGIN_L + 8, y + 6);
 
         doc.setFont("helvetica", "normal");
@@ -564,7 +560,7 @@ function renderBlock(
       const rowH = 7;
 
       y = checkPage(rowH + 4);
-      doc.setFillColor(...NAVY);
+      doc.setFillColor(...BLUE);
       doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
       doc.setFont("helvetica", "bold");
       doc.setFontSize(6.5);
@@ -587,7 +583,7 @@ function renderBlock(
         }
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(doc.splitTextToSize(row.team, colW[0] - 2)[0], colX[0] + 1, y + 5);
 
         doc.setFont("helvetica", "normal");
@@ -603,7 +599,7 @@ function renderBlock(
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(row.fs, colX[6] + 1, y + 5);
 
         y += rowH;
@@ -618,7 +614,7 @@ function renderBlock(
       const rowH = 7;
 
       y = checkPage(rowH + 4);
-      doc.setFillColor(...NAVY);
+      doc.setFillColor(...BLUE);
       doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
       doc.setFont("helvetica", "bold");
       doc.setFontSize(6.5);
@@ -641,7 +637,7 @@ function renderBlock(
         }
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(doc.splitTextToSize(row.team, colW[0] - 2)[0], colX[0] + 1, y + 5);
 
         doc.setFont("helvetica", "normal");
@@ -661,7 +657,7 @@ function renderBlock(
       const rowH = 7;
 
       y = checkPage(rowH + 4);
-      doc.setFillColor(...NAVY);
+      doc.setFillColor(...BLUE);
       doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
       doc.setFont("helvetica", "bold");
       doc.setFontSize(6.5);
@@ -683,7 +679,7 @@ function renderBlock(
           doc.rect(MARGIN_L, y, CONTENT_W, rowH, "F");
         }
 
-        doc.setFillColor(...RED);
+        doc.setFillColor(...BLUE);
         doc.rect(colX[0] + 1, y + 1, 8, 5, "F");
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7);
@@ -692,12 +688,12 @@ function renderBlock(
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(7);
-        doc.setTextColor(...NAVY);
+        doc.setTextColor(...DARK);
         doc.text(row.team, colX[1] + 1, y + 5);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(8);
-        doc.setTextColor(...RED);
+        doc.setTextColor(...BLUE);
         doc.text(String(row.win_pts), colX[2] + 1, y + 5);
 
         doc.setFont("helvetica", "normal");
